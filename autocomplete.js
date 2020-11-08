@@ -97,46 +97,7 @@ const pokemonArray = ["Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmel
     "Eternatus", "Kubfu", "Urshifu", "Zarude"
 ]
 
-// Card search function
-$("#srch-button").on("click", (event) => {
-    $("#display-card").html("");
-    pokemonSearch = $("#pokemon-search").val();
-    pokemoncardURL = "https://api.pokemontcg.io/v1/cards?name=" + pokemonSearch;
-    event.preventDefault();
-    $.ajax({
-        url: pokemoncardURL,
-        method: "GET"
-    }).then(function(response){
-        console.log(response);
-        for(i=0; i < response.cards.length; i++){
-            cardImage = $("<img>").attr("src", response.cards[i].imageUrl);
-            $("#display-card").append(cardImage);
-        }
-    });
-});
-
-$("#srch-set-button").on("click", (event) => {
-    $("#display-card").html("");
-    let setSearch = $("#set-dropdown").val();
-    console.log(setSearch);
-    pokemoncardURL = "https://api.pokemontcg.io/v1/cards?setCode=" + setSearch;
-    event.preventDefault();
-    $.ajax({
-        url: pokemoncardURL,
-        method: "GET"
-    }).then(function(response){
-        console.log(response);
-        for(i=0; i < response.cards.length; i++){
-            cardImage = $("<img>").attr("src", response.cards[i].imageUrl);
-            $("#display-card").append(cardImage);
-        }
-    });
-});
-
-
-
-
-function autocomplete(inp, arr) {
+export function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
     var currentFocus;
@@ -232,5 +193,3 @@ function autocomplete(inp, arr) {
       closeAllLists(e.target);
   });
   }
-
-autocomplete(document.getElementById("pokemon-search"), pokemonArray);

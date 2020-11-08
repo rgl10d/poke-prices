@@ -1,5 +1,9 @@
 /* General Styles */
 
+img {
+  padding: 0px 0px 15px 15px;
+}
+
 /* Search container */
 #search-container {
     margin-top: 50px;
