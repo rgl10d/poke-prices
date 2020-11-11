@@ -95,13 +95,13 @@ const pokemonArray = ["Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmel
     "Snom", "Frosmoth", "Stonjourner", "Eiscue", "Indeedee", "Morpeko", "Cufant", "Copperajah", "Dracozolt",
     "Arctozolt", "Dracovish", "Arctovish", "Duraludon", "Dreepy", "Drakloak", "Dragapult", "Zacian", "Zamazenta",
     "Eternatus", "Kubfu", "Urshifu", "Zarude"
-]
+];
 
 // Card search function
 $("#srch-button").on("click", (event) => {
     $("#display-card").html("");
     pokemonSearch = $("#pokemon-search").val();
-    pokemoncardURL = "https://api.pokemontcg.io/v1/cards?name=" + pokemonSearch;
+    pokemoncardURL = "https://api.pokemontcg.io/v1/cards?supertype=pokémon&name=" + pokemonSearch;
     event.preventDefault();
     $.ajax({
         url: pokemoncardURL,
@@ -109,12 +109,15 @@ $("#srch-button").on("click", (event) => {
     }).then(function(response){
         console.log(response);
         for(i=0; i < response.cards.length; i++){
-            cardImage = $("<img>").attr("src", response.cards[i].imageUrl);
-            $("#display-card").append(cardImage);
+            let cardImage = $("<img>").attr("src", response.cards[i].imageUrl);
+            let resultsBox = $("<div>").attr("id", "result" + i);
+            $("#display-card").append(resultsBox);
+            $(resultsBox).append(cardImage);
         }
     });
 });
 
+// Set search function
 $("#srch-set-button").on("click", (event) => {
     $("#display-card").html("");
     let setSearch = $("#set-dropdown").val();
@@ -127,8 +130,10 @@ $("#srch-set-button").on("click", (event) => {
     }).then(function(response){
         console.log(response);
         for(i=0; i < response.cards.length; i++){
-            cardImage = $("<img>").attr("src", response.cards[i].imageUrl);
-            $("#display-card").append(cardImage);
+          let cardImage = $("<img>").attr("src", response.cards[i].imageUrl);
+          let resultsBox = $("<div>").attr("id", "result" + i);
+          $("#display-card").append(resultsBox);
+          $(resultsBox).append(cardImage);
         }
     });
 });
