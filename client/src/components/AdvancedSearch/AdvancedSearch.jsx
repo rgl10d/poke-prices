@@ -13,21 +13,22 @@ const AdvancedSearch = () => {
     axios
       .get(query)
       .then((response) => {
-        console.log(response.data.data);
+        console.log(response);
         setCards(response.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
+  
   const getSets = () => {
     const query =
     "https://api.pokemontcg.io/v2/cards?q=set.id:" + setSearch;
+    // "https://api.pokemontcg.io/v2/cards?pageSize=25&page=1&q=set.id:" + setSearch;
     axios
       .get(query)
       .then((response) => {
-        console.log(response.data.data);
+        console.log(response);
         setCards(response.data.data);
       })
       .catch((err) => {
