@@ -1,4 +1,16 @@
 .card-results {
-    float: left;
-    clear: both;
+    /* float: left;
+    clear: both; */
+    max-height: 330px;
+    max-width: 240px;
+}
+
+.set-symbol {
+    max-width: 25px;
+    max-height: 25px;
+}
+
+p {
+    font-family: 'Gill Sans Condensed', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
 }
