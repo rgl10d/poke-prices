@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import CardSummary from "../CardSummary/CardSummary";
+import "./AdvancedSearch.css";
 
 const AdvancedSearch = () => {
   const [pokemonSearch, setPokemonSearch] = useState();
@@ -13,14 +14,14 @@ const AdvancedSearch = () => {
     axios
       .get(query)
       .then((response) => {
-        console.log(response);
+        console.log(response.data.data);
         setCards(response.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  
+
   const getSets = () => {
     const query =
     "https://api.pokemontcg.io/v2/cards?q=set.id:" + setSearch;
@@ -28,7 +29,7 @@ const AdvancedSearch = () => {
     axios
       .get(query)
       .then((response) => {
-        console.log(response);
+        console.log(response.data.data);
         setCards(response.data.data);
       })
       .catch((err) => {
@@ -39,19 +40,24 @@ const AdvancedSearch = () => {
   return (
     <>
       <div className="row">
-        <div id="card-search" className="col-sm-12">
+        <div className="col-sm-12 input-group mb-3 searchEl">
+          <div className="input-group-prepend">
+            <label className="input-group-text" htmlFor="pokemon-search">
+              Pokémon
+            </label>
+          </div>
             <input
               id="pokemon-search"
               type="text"
               name="pokemon search"
-              placeholder="Pokémon"
+              placeholder="Weedle"
               onChange={(e) => setPokemonSearch(e.target.value)}
             />
             <button className="btn btn-danger" onClick={getPokemon}>
               Search
             </button>
         </div>
-        <div className="input-group mb-3" id="adv-set">
+        <div className="input-group mb-3 searchEl">
           <div className="input-group-prepend">
             <label className="input-group-text" htmlFor="set-dropdown">
               Set
