@@ -40,7 +40,7 @@ const AdvancedSearch = () => {
   return (
     <>
       <div className="row">
-        <div className="col-sm-12 input-group mb-3 searchEl">
+        <div className="col-sm-12 input-group mb-3">
           <div className="input-group-prepend">
             <label className="input-group-text" htmlFor="pokemon-search">
               Pokémon
@@ -57,7 +57,7 @@ const AdvancedSearch = () => {
               Search
             </button>
         </div>
-        <div className="input-group mb-3 searchEl">
+        <div className="input-group mb-3">
           <div className="input-group-prepend">
             <label className="input-group-text" htmlFor="set-dropdown">
               Set
