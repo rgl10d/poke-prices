@@ -40,6 +40,50 @@ const CardSummary = (props) => {
               </div>
             );
           } else if (
+            cards.tcgplayer.prices.normal &&
+            cards.tcgplayer.prices.holofoil &&
+            cards.tcgplayer.prices.reverseHolofoil
+          ) {
+            return (
+              <div className="col-sm-3">
+                <div className="summary-position">
+                  {summary}
+                  <hr className="my-1 separater" />
+                  <p>TCGPlayer:</p>
+                  <p>Normal:</p>
+                  <p>
+                    Low: ${cards.tcgplayer.prices.normal.low}
+                    <span className="summary-prices">
+                      High: ${cards.tcgplayer.prices.normal.high}
+                    </span>
+                    <span className="summary-prices">
+                      Market: ${cards.tcgplayer.prices.normal.market}
+                    </span>
+                  </p>
+                  <p>Holofoil:</p>
+                  <p>
+                    Low: ${cards.tcgplayer.prices.holofoil.low}
+                    <span className="summary-prices">
+                      High: ${cards.tcgplayer.prices.holofoil.high}
+                    </span>
+                    <span className="summary-prices">
+                      Market: ${cards.tcgplayer.prices.holofoil.market}
+                    </span>
+                  </p>
+                  <p>Reverse Holofoil:</p>
+                  <p>
+                    Low: ${cards.tcgplayer.prices.reverseHolofoil.low}
+                    <span className="summary-prices">
+                      High: ${cards.tcgplayer.prices.reverseHolofoil.high}
+                    </span>
+                    <span className="summary-prices">
+                      Market: ${cards.tcgplayer.prices.reverseHolofoil.market}
+                    </span>
+                  </p>
+                </div>
+              </div>
+            );
+          } else if (
             cards.tcgplayer.prices.holofoil &&
             cards.tcgplayer.prices.normal
           ) {
