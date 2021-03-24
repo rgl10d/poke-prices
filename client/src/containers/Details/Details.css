@@ -1,0 +1,14 @@
+.large-card {
+    position: absolute;
+    top: 10%;
+}
+
+@media only screen and (max-width: 768px) {
+    /* .large-card-image {
+      width: 80%;
+      height: 80%;
+    } */
+    .large-card {
+        top: 0%;
+    }
+  }
