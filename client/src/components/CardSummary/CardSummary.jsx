@@ -1,11 +1,13 @@
 import React from "react";
 import "./CardSummary.css";
+import { Link } from "react-router-dom";
 
 const CardSummary = (props) => {
   return (
     <>
       <div className="row">
         {props.cards.map((cards) => {
+          // BASIC CARD INFO
           const summary = (
             <>
               <p className="card-name">{cards.name}</p>
@@ -26,6 +28,17 @@ const CardSummary = (props) => {
               </p>
             </>
           );
+          // DETAILS LINK FOR EACH CARD
+          const detailsBtn = (
+            <Link
+            className="btn btn-primary btn-lg details-button"
+            to={`/details/${cards.id}`}
+            state={{ cards }}
+          >
+            Details
+          </Link>
+          );
+          // DISPLAY FOR MISSING PRICE INFO
           if (!cards.tcgplayer) {
             return (
               <div className="col-sm-3">
@@ -36,9 +49,11 @@ const CardSummary = (props) => {
                   <p>Low: --</p>
                   <p>High: --</p>
                   <p>Market: --</p>
+                  {detailsBtn}
                 </div>
               </div>
             );
+          // DISPLAY PRICES FOR NORMAL/HOLO/REVERSEHOLO CARDS
           } else if (
             cards.tcgplayer.prices.normal &&
             cards.tcgplayer.prices.holofoil &&
@@ -80,9 +95,11 @@ const CardSummary = (props) => {
                       Market: ${cards.tcgplayer.prices.reverseHolofoil.market}
                     </span>
                   </p>
+                  {detailsBtn}
                 </div>
               </div>
             );
+          // DISPLAY PRICES FOR NORMAL/HOLO CARDS
           } else if (
             cards.tcgplayer.prices.holofoil &&
             cards.tcgplayer.prices.normal
@@ -95,6 +112,7 @@ const CardSummary = (props) => {
                 <p>Market: ${cards.tcgplayer.prices.normal.market}</p>
               </div>
             );
+          // DISPLAY PRICES FOR HOLO/REVERSEHOLO CARDS
           } else if (
             cards.tcgplayer.prices.holofoil &&
             cards.tcgplayer.prices.reverseHolofoil
@@ -126,9 +144,11 @@ const CardSummary = (props) => {
                       Market: ${cards.tcgplayer.prices.reverseHolofoil.market}
                     </span>
                   </p>
+                  {detailsBtn}
                 </div>
               </div>
             );
+          // DISPLAY PRICES FOR NORMAL/REVERSEHOLO CARDS
           } else if (
             cards.tcgplayer.prices.normal &&
             cards.tcgplayer.prices.reverseHolofoil
@@ -159,9 +179,11 @@ const CardSummary = (props) => {
                       Market: ${cards.tcgplayer.prices.reverseHolofoil.market}
                     </span>
                   </p>
+                  {detailsBtn}
                 </div>
               </div>
             );
+          // DISPLAY PRICES FOR HOLO ONLY CARDS
           } else if (cards.tcgplayer.prices.holofoil) {
             return (
               <div className="col-sm-3">
@@ -179,9 +201,11 @@ const CardSummary = (props) => {
                       Market: ${cards.tcgplayer.prices.holofoil.market}
                     </span>
                   </p>
+                  {detailsBtn}
                 </div>
               </div>
             );
+          // DISPLAY PRICES FOR NORMAL ONLY CARDS
           } else if (cards.tcgplayer.prices.normal) {
             return (
               <div className="col-sm-3">
@@ -199,6 +223,7 @@ const CardSummary = (props) => {
                       Market: ${cards.tcgplayer.prices.normal.market}
                     </span>
                   </p>
+                  {detailsBtn}
                 </div>
               </div>
             );
