@@ -16,18 +16,20 @@ const Details = () => {
   const [releaseDate, setReleaseDate] = useState([]);
   const { id } = useParams();
 
-  // Axios call for specific card information
+  // AXIOS CALL FOR SPECIFIC CARD INFORMATION
   const getDetails = async () => {
     const query = "https://api.pokemontcg.io/v2/cards/" + id;
     await axios
       .get(query)
       .then((response) => {
         console.log(response.data.data);
-        setAttacks(response.data.data.attacks);
+        if(response.data.data.types){
+          setAttacks(response.data.data.attacks);
+          setTypes(response.data.data.types);
+          setPokedexNumber(response.data.data.nationalPokedexNumbers[0]);
+        }
         setImage(response.data.data.images.small);
         setLargeImage(response.data.data.images.large);
-        setTypes(response.data.data.types);
-        setPokedexNumber(response.data.data.nationalPokedexNumbers[0]);
         setCardDetail(response.data.data);
         setTotalNumber(response.data.data.set.printedTotal);
         setReleaseDate(response.data.data.set.releaseDate);
@@ -37,12 +39,13 @@ const Details = () => {
       });
   };
 
-  // Axios call when page loads
+  // AXIOS CALL WHEN PAGE LOADS
   useEffect(() => {
     getDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // LARGE CARD TOGGLE
   const handleShowLarge = () => {
     setSeeLarge(!seeLarge);
   };

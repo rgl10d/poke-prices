@@ -5,9 +5,14 @@ import "./AdvancedSearch.css";
 
 const AdvancedSearch = () => {
   const [pokemonSearch, setPokemonSearch] = useState();
+  const [trainerSearch, setTrainerSearch] = useState();
+  const [energySearch, setEnergySearch] = useState();
   const [setSearch, setSetSearch] = useState();
   const [cards, setCards] = useState([]);
 
+// TODO: PAGINATION OF ALL SEARCH TYPES
+
+  // POKEMON SEARCH
   const getPokemon = () => {
     const query =
       "https://api.pokemontcg.io/v2/cards?q=supertype:pokemon name:" + pokemonSearch;
@@ -22,6 +27,37 @@ const AdvancedSearch = () => {
       });
   };
 
+  // TRAINER SEARCH
+  const getTrainer = () => {
+    const query =
+      "https://api.pokemontcg.io/v2/cards?q=supertype:trainer name:" + trainerSearch;
+    axios
+      .get(query)
+      .then((response) => {
+        console.log(response.data.data);
+        setCards(response.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // ENERGY SEARCH
+  const getEnergy = () => {
+    const query =
+      "https://api.pokemontcg.io/v2/cards?q=supertype:energy name:" + energySearch;
+    axios
+      .get(query)
+      .then((response) => {
+        console.log(response.data.data);
+        setCards(response.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // SET SEARCH
   const getSets = () => {
     const query =
     "https://api.pokemontcg.io/v2/cards?q=set.id:" + setSearch;
@@ -40,6 +76,7 @@ const AdvancedSearch = () => {
   return (
     <>
       <div className="row">
+        {/* POKEMON SEARCH BAR */}
         <div className="col-sm-12 input-group mb-3">
           <div className="input-group-prepend">
             <label className="input-group-text" htmlFor="pokemon-search">
@@ -57,6 +94,43 @@ const AdvancedSearch = () => {
               Search
             </button>
         </div>
+        {/* TRAINER SEARCH BAR */}
+        <div className="col-sm-12 input-group mb-3">
+          <div className="input-group-prepend">
+            <label className="input-group-text" htmlFor="trainer-search">
+              Trainer
+            </label>
+          </div>
+            <input
+              id="trainer-search"
+              type="text"
+              name="trainer search"
+              placeholder="Brock"
+              onChange={(e) => setTrainerSearch(e.target.value)}
+            />
+            <button className="btn btn-danger" onClick={getTrainer}>
+              Search
+            </button>
+        </div>
+        {/* ENERGY SEARCH BAR */}
+        <div className="col-sm-12 input-group mb-3">
+          <div className="input-group-prepend">
+            <label className="input-group-text" htmlFor="energy-search">
+              Energy
+            </label>
+          </div>
+            <input
+              id="energy-search"
+              type="text"
+              name="energy search"
+              placeholder="Water"
+              onChange={(e) => setEnergySearch(e.target.value)}
+            />
+            <button className="btn btn-danger" onClick={getEnergy}>
+              Search
+            </button>
+        </div>
+        {/* SET SEARCH DROPDOWN */}
         <div className="input-group mb-3">
           <div className="input-group-prepend">
             <label className="input-group-text" htmlFor="set-dropdown">
