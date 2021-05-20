@@ -12,7 +12,7 @@ const AdvancedSearch = () => {
 
 // TODO: PAGINATION OF ALL SEARCH TYPES
 
-  // POKEMON SEARCH
+  // POKEMON SEARCH QUERY
   const getPokemon = () => {
     const query =
       "https://api.pokemontcg.io/v2/cards?q=supertype:pokemon name:" + pokemonSearch;
@@ -27,7 +27,7 @@ const AdvancedSearch = () => {
       });
   };
 
-  // TRAINER SEARCH
+  // TRAINER SEARCH QUERY
   const getTrainer = () => {
     const query =
       "https://api.pokemontcg.io/v2/cards?q=supertype:trainer name:" + trainerSearch;
@@ -42,7 +42,7 @@ const AdvancedSearch = () => {
       });
   };
 
-  // ENERGY SEARCH
+  // ENERGY SEARCH QUERY
   const getEnergy = () => {
     const query =
       "https://api.pokemontcg.io/v2/cards?q=supertype:energy name:" + energySearch;
@@ -57,7 +57,7 @@ const AdvancedSearch = () => {
       });
   };
 
-  // SET SEARCH
+  // SET SEARCH QUERY
   const getSets = () => {
     const query =
     "https://api.pokemontcg.io/v2/cards?q=set.id:" + setSearch;
@@ -87,7 +87,7 @@ const AdvancedSearch = () => {
               id="pokemon-search"
               type="text"
               name="pokemon search"
-              placeholder="Weedle"
+              placeholder="Vaporeon"
               onChange={(e) => setPokemonSearch(e.target.value)}
             />
             <button className="btn btn-danger" onClick={getPokemon}>
@@ -123,7 +123,7 @@ const AdvancedSearch = () => {
               id="energy-search"
               type="text"
               name="energy search"
-              placeholder="Water"
+              placeholder="Fire"
               onChange={(e) => setEnergySearch(e.target.value)}
             />
             <button className="btn btn-danger" onClick={getEnergy}>
@@ -235,6 +235,7 @@ const AdvancedSearch = () => {
           </button>
         </div>
       </div>
+      {/* CARD SEARCH RESULTS COMPONENT */}
       <CardSummary cards={cards} />
     </>
   );
