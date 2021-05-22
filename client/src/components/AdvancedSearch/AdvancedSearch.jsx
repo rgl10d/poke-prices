@@ -229,6 +229,8 @@ const AdvancedSearch = () => {
             <option value="swsh2">Rebel Clash</option>
             <option value="swsh3">Darkness Ablaze</option>
             <option value="swsh4">Vivid Voltage</option>
+            <option value="swsh45">Shining Fates</option>
+            <option value="swsh5">Battle Styles</option>
           </select>
           <button className="btn btn-primary" onClick={getSets}>
             Search
