@@ -11,6 +11,7 @@ const Details = () => {
   const [seeLarge, setSeeLarge] = useState(false);
   const [pokedexNumber, setPokedexNumber] = useState([]);
   const [types, setTypes] = useState([]);
+  const [cardSet, setCardSet] = useState([]);
   const [attacks, setAttacks] = useState([]);
   const [totalNumber, setTotalNumber] = useState([]);
   const [releaseDate, setReleaseDate] = useState([]);
@@ -33,6 +34,7 @@ const Details = () => {
         setCardDetail(response.data.data);
         setTotalNumber(response.data.data.set.printedTotal);
         setReleaseDate(response.data.data.set.releaseDate);
+        setCardSet(response.data.data.set.name);
       })
       .catch((err) => {
         console.log(err);
@@ -70,13 +72,14 @@ const Details = () => {
           />
         </dialog>
       )}
-      <p>Artist: {cardDetail.artist}</p>
+      <p>Set: {cardSet}</p>
       <p>
         Number in set: {cardDetail.number}/{totalNumber}
       </p>
       <p>Released: {releaseDate}</p>
       <p>Rarity: {cardDetail.rarity}</p>
       <p>HP: {cardDetail.hp}</p>
+      <p>Artist: {cardDetail.artist}</p>
       <p>{cardDetail.flavorText}</p>
       <p>Pokdex Number: {pokedexNumber}</p>
       {types.map((types) => {
