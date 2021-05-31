@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
-import CardSummary from "../CardSummary/CardSummary";
+// import axios from "axios";
+// import CardSummary from "../CardSummary/CardSummary";
+import { Link } from "react-router-dom";
 import "./AdvancedSearch.css";
 
 const AdvancedSearch = () => {
@@ -8,70 +9,70 @@ const AdvancedSearch = () => {
   const [trainerSearch, setTrainerSearch] = useState();
   const [energySearch, setEnergySearch] = useState();
   const [setSearch, setSetSearch] = useState();
-  const [cards, setCards] = useState([]);
+  // const [cards, setCards] = useState([]);
 
 // TODO: PAGINATION OF ALL SEARCH TYPES
 
   // POKEMON SEARCH QUERY
-  const getPokemon = () => {
-    const query =
-      "https://api.pokemontcg.io/v2/cards?q=supertype:pokemon name:" + pokemonSearch;
-    axios
-      .get(query)
-      .then((response) => {
-        console.log(response.data.data);
-        setCards(response.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const getPokemon = () => {
+  //   const query =
+  //     "https://api.pokemontcg.io/v2/cards?q=supertype:pokemon name:" + pokemonSearch;
+  //   axios
+  //     .get(query)
+  //     .then((response) => {
+  //       console.log(response.data.data);
+  //       setCards(response.data.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   // TRAINER SEARCH QUERY
-  const getTrainer = () => {
-    const query =
-      "https://api.pokemontcg.io/v2/cards?q=supertype:trainer name:" + trainerSearch;
-    axios
-      .get(query)
-      .then((response) => {
-        console.log(response.data.data);
-        setCards(response.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const getTrainer = () => {
+  //   const query =
+  //     "https://api.pokemontcg.io/v2/cards?q=supertype:trainer name:" + trainerSearch;
+  //   axios
+  //     .get(query)
+  //     .then((response) => {
+  //       console.log(response.data.data);
+  //       setCards(response.data.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   // ENERGY SEARCH QUERY
-  const getEnergy = () => {
-    const query =
-      "https://api.pokemontcg.io/v2/cards?q=supertype:energy name:" + energySearch;
-    axios
-      .get(query)
-      .then((response) => {
-        console.log(response.data.data);
-        setCards(response.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const getEnergy = () => {
+  //   const query =
+  //     "https://api.pokemontcg.io/v2/cards?q=supertype:energy name:" + energySearch;
+  //   axios
+  //     .get(query)
+  //     .then((response) => {
+  //       console.log(response.data.data);
+  //       setCards(response.data.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   // SET SEARCH QUERY
-  const getSets = () => {
-    const query =
-    "https://api.pokemontcg.io/v2/cards?q=set.id:" + setSearch;
-    // "https://api.pokemontcg.io/v2/cards?pageSize=25&page=1&q=set.id:" + setSearch;
-    axios
-      .get(query)
-      .then((response) => {
-        console.log(response.data.data);
-        setCards(response.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const getSets = () => {
+  //   const query =
+  //   "https://api.pokemontcg.io/v2/cards?q=set.id:" + setSearch;
+  //   // "https://api.pokemontcg.io/v2/cards?pageSize=25&page=1&q=set.id:" + setSearch;
+  //   axios
+  //     .get(query)
+  //     .then((response) => {
+  //       console.log(response.data.data);
+  //       setCards(response.data.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   return (
     <>
@@ -90,9 +91,15 @@ const AdvancedSearch = () => {
               placeholder="Vaporeon"
               onChange={(e) => setPokemonSearch(e.target.value)}
             />
-            <button className="btn btn-danger" onClick={getPokemon}>
+            {/* <button className="btn btn-danger" onClick={getPokemon}>
               Search
-            </button>
+            </button> */}
+            <Link
+              className="btn btn-danger"
+              to={`/results/pokemon/${pokemonSearch}`}
+            >
+              Search
+          </Link>
         </div>
         {/* TRAINER SEARCH BAR */}
         <div className="col-sm-12 input-group mb-3">
@@ -108,9 +115,15 @@ const AdvancedSearch = () => {
               placeholder="Brock"
               onChange={(e) => setTrainerSearch(e.target.value)}
             />
-            <button className="btn btn-danger" onClick={getTrainer}>
+            {/* <button className="btn btn-danger" onClick={getTrainer}>
               Search
-            </button>
+            </button> */}
+            <Link
+            className="btn btn-danger"
+            to={`/results/trainer/${trainerSearch}`}
+          >
+            Search
+          </Link>
         </div>
         {/* ENERGY SEARCH BAR */}
         <div className="col-sm-12 input-group mb-3">
@@ -126,9 +139,15 @@ const AdvancedSearch = () => {
               placeholder="Fire"
               onChange={(e) => setEnergySearch(e.target.value)}
             />
-            <button className="btn btn-danger" onClick={getEnergy}>
+            {/* <button className="btn btn-danger" onClick={getEnergy}>
               Search
-            </button>
+            </button> */}
+          <Link
+            className="btn btn-danger"
+            to={`/results/energy/${energySearch}`}
+          >
+            Search
+          </Link>
         </div>
         {/* SET SEARCH DROPDOWN */}
         <div className="input-group mb-3">
@@ -232,13 +251,19 @@ const AdvancedSearch = () => {
             <option value="swsh45">Shining Fates</option>
             <option value="swsh5">Battle Styles</option>
           </select>
-          <button className="btn btn-primary" onClick={getSets}>
+          {/* <button className="btn btn-primary" onClick={getSets}>
             Search
-          </button>
+          </button> */}
+          <Link
+            className="btn btn-danger"
+            to={`/results/set/${setSearch}`}
+          >
+            Search
+          </Link>
         </div>
       </div>
       {/* CARD SEARCH RESULTS COMPONENT */}
-      <CardSummary cards={cards} />
+      {/* <CardSummary cards={cards} /> */}
     </>
   );
 };
