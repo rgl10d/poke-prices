@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
-// import CardSummary from "../../components/CardSummary/CardSummary";
-import CardSummaryTest from "../../components/CardSummaryTest/CardSummaryTest";
-// import Pagination from "../../components/Pagination/Pagination";
+import CardSummary from "../../components/CardSummary/CardSummary";
 import Navbar from "../../components/Navbar/Navbar";
-// import { Link } from "react-router-dom";
 
 const PokemonResults = () => {
   const entrySearch = useParams();
@@ -57,14 +54,11 @@ const PokemonResults = () => {
     <>
       <Navbar />
       <div className="container">
-        {/* <CardSummary cards={cards} /> */}
-        <CardSummaryTest cards={cards} />
-
+        <CardSummary cards={cards} />
         <nav aria-label="Page navigation">
           <ul className="pagination">{paginationNumbers}</ul>
         </nav>
       </div>
-      {/* <Pagination cards={cards} /> */}
     </>
   );
 };

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
-// import CardSummary from "../../components/CardSummary/CardSummary";
-import CardSummaryTest from "../../components/CardSummaryTest/CardSummaryTest";
+import CardSummary from "../../components/CardSummary/CardSummary";
 import Navbar from "../../components/Navbar/Navbar";
 
 const SetResults = () => {
@@ -55,8 +54,7 @@ const SetResults = () => {
     <>
       <Navbar />
       <div className="container">
-        {/* <CardSummary cards={cards} /> */}
-        <CardSummaryTest cards={cards} />
+        <CardSummary cards={cards} />
         <nav aria-label="Page navigation">
           <ul className="pagination">{paginationNumbers}</ul>
         </nav>

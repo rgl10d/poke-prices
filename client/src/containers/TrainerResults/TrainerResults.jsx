@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
-// import CardSummary from "../../components/CardSummary/CardSummary";
-import CardSummaryTest from "../../components/CardSummaryTest/CardSummaryTest";
+import CardSummary from "../../components/CardSummary/CardSummary";
 import Navbar from "../../components/Navbar/Navbar";
 
 const Results = () => {
@@ -54,21 +53,10 @@ const Results = () => {
 
   return (
     <>
-      {/* <select
-        className="custom-select scrollable-menu"
-        id="set-dropdown"
-        onChange={(e) => setSuperType(e.target.value)}
-      >
-        <option defaultValue value="pokemon">
-          Pokemon
-        </option>
-        <option value="trainer">Trainer</option>
-        <option value="energy">Energy</option>
-      </select> */}
       <Navbar />
       <div className="container">
-        {/* <CardSummary cards={cards} /> */}
-        <CardSummaryTest cards={cards} />
+        <CardSummary cards={cards} />
+        {/* <CardSummaryTest cards={cards} /> */}
         <nav aria-label="Page navigation">
           <ul className="pagination">{paginationNumbers}</ul>
         </nav>
