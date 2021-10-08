@@ -1,10 +1,12 @@
-.searchEl {
+ .searchEl {
   width: 30%;
 }
 
 .search-bar-row {
     display: flex;
     justify-content: space-around;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 
 .search-containers {

@@ -24,7 +24,7 @@ const Details = () => {
       .get(query)
       .then((response) => {
         console.log(response.data.data);
-        if(response.data.data.types){
+        if (response.data.data.types) {
           setAttacks(response.data.data.attacks);
           setTypes(response.data.data.types);
           setPokedexNumber(response.data.data.nationalPokedexNumbers[0]);
@@ -55,44 +55,42 @@ const Details = () => {
   return (
     <>
       <Navbar />
-      <h1>{cardDetail.name}</h1>
-      <img src={image} alt={cardDetail.name} onClick={handleShowLarge} />
-      <p>Click to enlarge or shrink image</p>
-      {seeLarge && (
-        <dialog
-          className="large-card"
-          open
-          onClick={handleShowLarge}
-        >
-          <img
-            className="large-card-image"
-            src={largeImage}
-            onClick={handleShowLarge}
-            alt={cardDetail.name}
-          />
-        </dialog>
-      )}
-      <p>Set: {cardSet}</p>
-      <p>
-        Number in set: {cardDetail.number}/{totalNumber}
-      </p>
-      <p>Released: {releaseDate}</p>
-      <p>Rarity: {cardDetail.rarity}</p>
-      <p>HP: {cardDetail.hp}</p>
-      <p>Artist: {cardDetail.artist}</p>
-      <p>{cardDetail.flavorText}</p>
-      <p>Pokdex Number: {pokedexNumber}</p>
-      {types.map((types) => {
-        return <p>Type(s): {types}</p>;
-      })}
-      {attacks.map((attacks) => {
-        return (
-          <p>
-            <span>{attacks.name}</span> - {attacks.text}{" "}
-            <span> {attacks.damage} </span>
-          </p>
-        );
-      })}
+      <div className="container">
+        <h1>{cardDetail.name}</h1>
+        <img src={image} alt={cardDetail.name} onClick={handleShowLarge} />
+        <p>Click to enlarge or shrink image</p>
+        {seeLarge && (
+          <dialog className="large-card" open onClick={handleShowLarge}>
+            <img
+              className="large-card-image"
+              src={largeImage}
+              onClick={handleShowLarge}
+              alt={cardDetail.name}
+            />
+          </dialog>
+        )}
+        <p>Set: {cardSet}</p>
+        <p>
+          Number in set: {cardDetail.number}/{totalNumber}
+        </p>
+        <p>Released: {releaseDate}</p>
+        <p>Rarity: {cardDetail.rarity}</p>
+        <p>HP: {cardDetail.hp}</p>
+        <p>Artist: {cardDetail.artist}</p>
+        <p>{cardDetail.flavorText}</p>
+        <p>Pokdex Number: {pokedexNumber}</p>
+        {types.map((types) => {
+          return <p>Type(s): {types}</p>;
+        })}
+        {attacks.map((attacks) => {
+          return (
+            <p>
+              <span>{attacks.name}</span> - {attacks.text}{" "}
+              <span> {attacks.damage} </span>
+            </p>
+          );
+        })}
+      </div>
     </>
   );
 };
