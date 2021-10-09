@@ -77,7 +77,7 @@ const AdvancedSearch = () => {
     <>
       <Navbar />
       <div className="fluid-container">
-        <div className="row search-bar-row">
+        <div className="row search-bar-row no-gutters">
           {/* POKEMON SEARCH BAR */}
           <div
             id="pokemon-search-container"
