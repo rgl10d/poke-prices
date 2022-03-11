@@ -3,9 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Details from "./containers/Details/Details.jsx";
 import Home from "./containers/Home/Home.jsx";
 import Search from "./containers/Search/Search.jsx";
-import TrainerResults from "./containers/TrainerResults/TrainerResults";
-import PokemonResults from "./containers/PokemonResults/PokemonResults";
-import EnergyResults from "./containers/EnergyResults/EnergyResults";
+import SearchResults from "./containers/SearchResults/SearchResults.jsx";
 import SetResults from "./containers/SetResults/SetResults";
 
 function App() {
@@ -14,9 +12,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/search" component={Search} />
-        <Route exact path="/results/pokemon/:search&page=:pageNum" component={PokemonResults} />
-        <Route exact path="/results/trainer/:search&page=:pageNum" component={TrainerResults} />
-        <Route exact path="/results/energy/:search&page=:pageNum" component={EnergyResults} />
+        <Route exact path="/search/results/:cardType/:search&page=:pageNum" component={SearchResults} />
         <Route exact path="/results/set/:search&page=:pageNum" component={SetResults} />
         <Route exact path="/details/:id" component={Details} />
       </Switch>

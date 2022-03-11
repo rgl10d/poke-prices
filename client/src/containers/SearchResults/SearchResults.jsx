@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router";
-import CardSummary from "../../components/CardSummary/CardSummary";
-import Navbar from "../../components/Navbar/Navbar";
+import { useParams } from "react-router-dom";
+import CardSummary from "../../components/CardSummary/CardSummary.jsx";
+import Navbar from "../../components/Navbar/Navbar.jsx";
 
-const SetResults = () => {
-  const entrySearch = useParams();
+const SearchResults = () => {
+  const params = useParams();
   const [cards, setCards] = useState([]);
   const [cardTotal, setCardTotal] = useState();
-
-  const paginationNumbers = [];
+  // PAGINATION VARIABLES
+  const pageNumArr = [];
   const currentPage = window.location.pathname.split("=");
 
+  // CARD API CALL
   const getSearchResults = async () => {
-    console.log(entrySearch);
+    console.log(params);
     const query =
-      "https://api.pokemontcg.io/v2/cards?q=set.id:" +
-      entrySearch.search +
+      "https://api.pokemontcg.io/v2/cards?q=supertype:" +
+      params.cardType +
+      " name:" +
+      params.search +
       "&page=" +
-      entrySearch.pageNum +
+      params.pageNum +
       "&pageSize=10&X-Api-Key=bda1ab63-5db0-43e0-8b1f-a50ba6b7fc4b";
     axios
       .get(query)
@@ -38,26 +41,26 @@ const SetResults = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // PAGINATION FOR LOOP TO CREATE PAGE NUMBERS
+  // PAGINATION FOR-LOOP TO CREATE PAGE NUMBERS
   for (let i = 1; i <= Math.ceil(cardTotal / 10); i++) {
     // IF STATEMENT TO DETERMINE CURRENT PAGE AND HIGHLIGHT IT
     if (parseInt(currentPage[1]) === i) {
-      paginationNumbers.push(
+      pageNumArr.push(
         <li className="page-item active">
           <a
             className="page-link"
-            href={"/results/set/" + entrySearch.search + "&page=" + i}
+            href={"/search/results/" + params.cardType + "/" + params.search + "&page=" + i}
           >
             {i}
           </a>
         </li>
       );
     } else {
-      paginationNumbers.push(
+      pageNumArr.push(
         <li className="page-item">
           <a
             className="page-link"
-            href={"/results/set/" + entrySearch.search + "&page=" + i}
+            href={"/search/results/" + params.cardType + "/" + params.search + "&page=" + i}
           >
             {i}
           </a>
@@ -72,13 +75,11 @@ const SetResults = () => {
       <div className="container">
         <CardSummary cards={cards} />
         <nav aria-label="Search results pages">
-          <ul className="pagination justify-content-center">
-            {paginationNumbers}
-          </ul>
+          <ul className="pagination justify-content-center">{pageNumArr}</ul>
         </nav>
       </div>
     </>
   );
 };
 
-export default SetResults;
+export default SearchResults;

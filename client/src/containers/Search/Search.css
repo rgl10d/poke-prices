@@ -7,11 +7,15 @@
     justify-content: space-around;
 }
 
-.search-containers {
+.search-container {
   position: relative;
   text-align: center;
   height: 500px;
   margin: 30px 0;
   border: solid grey 1px;
   box-shadow: 1px 4px 4px 2px darkgrey;
+}
+
+#card-search-container {
+  background-color: lightblue;
 }

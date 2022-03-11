@@ -4,18 +4,19 @@ import { useParams } from "react-router";
 import CardSummary from "../../components/CardSummary/CardSummary";
 import Navbar from "../../components/Navbar/Navbar";
 
-const Results = () => {
+const PokemonResults = () => {
   const entrySearch = useParams();
   const [cards, setCards] = useState([]);
   const [cardTotal, setCardTotal] = useState();
   // const [superType, setSuperType] = useState([]);
 
   const paginationNumbers = [];
+  const currentPage = window.location.pathname.split("=");
 
   const getSearchResults = async () => {
     console.log(entrySearch);
     const query =
-      "https://api.pokemontcg.io/v2/cards?q=supertype:trainer name:" +
+      "https://api.pokemontcg.io/v2/cards?q=supertype:pokemon name:" +
       entrySearch.search +
       "&page=" +
       entrySearch.pageNum +
@@ -38,17 +39,32 @@ const Results = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // PAGINATION FOR-LOOP TO CREATE PAGE NUMBERS
   for (let i = 1; i <= Math.ceil(cardTotal / 10); i++) {
-    paginationNumbers.push(
-      <li className="page-item">
-        <a
-          className="page-link"
-          href={"/results/trainer/" + entrySearch.search + "&page=" + i}
-        >
-          {i}
-        </a>
-      </li>
-    );
+    // IF STATEMENT TO DETERMINE CURRENT PAGE AND HIGHLIGHT IT
+    if (parseInt(currentPage[1]) === i) {
+      paginationNumbers.push(
+        <li className="page-item active">
+          <a
+            className="page-link"
+            href={"/results/pokemon/" + entrySearch.search + "&page=" + i}
+          >
+            {i}
+          </a>
+        </li>
+      );
+    } else {
+      paginationNumbers.push(
+        <li className="page-item">
+          <a
+            className="page-link"
+            href={"/results/pokemon/" + entrySearch.search + "&page=" + i}
+          >
+            {i}
+          </a>
+        </li>
+      );
+    }
   }
 
   return (
@@ -56,13 +72,12 @@ const Results = () => {
       <Navbar />
       <div className="container">
         <CardSummary cards={cards} />
-        {/* <CardSummaryTest cards={cards} /> */}
-        <nav aria-label="Page navigation">
-          <ul className="pagination">{paginationNumbers}</ul>
+        <nav aria-label="Search results pages">
+          <ul className="pagination justify-content-center">{paginationNumbers}</ul>
         </nav>
       </div>
     </>
   );
 };
 
-export default Results;
+export default PokemonResults;

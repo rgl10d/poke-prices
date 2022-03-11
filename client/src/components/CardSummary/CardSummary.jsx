@@ -52,28 +52,30 @@ const CardSummaryTest = (props) => {
               </Link>
             </div>
             {/* CARD PRICES */}
-            <div className="result-info col-lg-6">
+            {/* <div className="result-info col-lg-6">
               <p className="card-name">Prices:</p>
-              <div className="row">
+              <div className="row"> */}
                 {/* LOOPS OVER THE FIRST TCGPLAYER OBJECT FOR EACH VARIATION OF THE CARD */}
-                {Object.entries(cards.tcgplayer.prices).map(([key, value]) => {
-                  return (
-                    <div className="result-info col-lg-5">
-                      <p>{key.toUpperCase()}</p>
-                      {/* LOOPS OVER THE PRICE OBJECT IN TCGPLAYER FOR EACH VARIATION OF THE CARD */}
-                      {Object.entries(value).map(([key2, value2]) => {
-                        return (
-                          <>
-                            <p className="result-section-title">{key2.toUpperCase()}</p>
-                            <p>{value2}</p>
-                          </>
-                        );
-                      })}
-                    </div>
-                  );
+                {/* {Object.entries(cards.tcgplayer.prices).map(([key, value]) => {
+                    return (
+                      <div className="result-info col-lg-5">
+                        <p>{key.toUpperCase()}</p> */}
+                        {/* LOOPS OVER THE PRICE OBJECT IN TCGPLAYER FOR EACH VARIATION OF THE CARD */}
+                        {/* {Object.entries(value).map(([key2, value2]) => {
+                          return (
+                            <>
+                              <p className="result-section-title">
+                                {key2.toUpperCase()}
+                              </p>
+                              <p>{value2}</p>
+                            </>
+                          );
+                        })}
+                      </div>
+                    );
                 })}
               </div>
-            </div>
+            </div> */}
           </div>
         );
       })}

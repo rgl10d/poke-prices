@@ -1,149 +1,62 @@
 import React, { useState } from "react";
-// import axios from "axios";
-// import CardSummary from "../CardSummary/CardSummary";
 import Navbar from "../../components/Navbar/Navbar.jsx";
 import { Link } from "react-router-dom";
 import "./Search.css";
+// import { set } from "mongoose";
 
 const AdvancedSearch = () => {
-  const [pokemonSearch, setPokemonSearch] = useState();
-  const [trainerSearch, setTrainerSearch] = useState();
-  const [energySearch, setEnergySearch] = useState();
   const [setSearch, setSetSearch] = useState();
-  // const [cards, setCards] = useState([]);
-
-  // POKEMON SEARCH QUERY
-  // const getPokemon = () => {
-  //   const query =
-  //     "https://api.pokemontcg.io/v2/cards?q=supertype:pokemon name:" + pokemonSearch;
-  //   axios
-  //     .get(query)
-  //     .then((response) => {
-  //       console.log(response.data.data);
-  //       setCards(response.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // TRAINER SEARCH QUERY
-  // const getTrainer = () => {
-  //   const query =
-  //     "https://api.pokemontcg.io/v2/cards?q=supertype:trainer name:" + trainerSearch;
-  //   axios
-  //     .get(query)
-  //     .then((response) => {
-  //       console.log(response.data.data);
-  //       setCards(response.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // ENERGY SEARCH QUERY
-  // const getEnergy = () => {
-  //   const query =
-  //     "https://api.pokemontcg.io/v2/cards?q=supertype:energy name:" + energySearch;
-  //   axios
-  //     .get(query)
-  //     .then((response) => {
-  //       console.log(response.data.data);
-  //       setCards(response.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // SET SEARCH QUERY
-  // const getSets = () => {
-  //   const query =
-  //   "https://api.pokemontcg.io/v2/cards?q=set.id:" + setSearch;
-  //   // "https://api.pokemontcg.io/v2/cards?pageSize=25&page=1&q=set.id:" + setSearch;
-  //   axios
-  //     .get(query)
-  //     .then((response) => {
-  //       console.log(response.data.data);
-  //       setCards(response.data.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  const [cardType, setCardType] = useState();
+  const [cardSearch, setCardSearch] = useState();
+  const [placeholder, setPlaceholder] = useState();
 
   return (
     <>
       <Navbar />
       <div className="fluid-container">
         <div className="row search-bar-row no-gutters">
-          {/* POKEMON SEARCH BAR */}
-          <div
-            id="pokemon-search-container"
-            className="col-lg-3 search-containers"
-          >
-            <h2>Pokemon Search</h2>
-            <input
-              id="pokemon-search"
-              type="text"
-              name="pokemon search"
-              placeholder="Vaporeon"
-              onChange={(e) => setPokemonSearch(e.target.value)}
-            />
-            {/* <button className="btn btn-danger" onClick={getPokemon}>
-              Search
-            </button> */}
-            <Link
-              className="btn btn-danger"
-              to={`/results/pokemon/${pokemonSearch}&page=1`}
-            >
-              Search
-            </Link>
-          </div>
-          {/* TRAINER SEARCH BAR */}
-          <div className="col-lg-3 search-containers">
-          <h2>Trainer Search</h2>
-            <input
-              id="trainer-search"
-              type="text"
-              name="trainer search"
-              placeholder="Brock"
-              onChange={(e) => setTrainerSearch(e.target.value)}
-            />
-            {/* <button className="btn btn-danger" onClick={getTrainer}>
-              Search
-            </button> */}
-            <Link
-              className="btn btn-danger"
-              to={`/results/trainer/${trainerSearch}&page=1`}
-            >
-              Search
-            </Link>
-          </div>
-          {/* ENERGY SEARCH BAR */}
-          <div className="col-lg-3 search-containers">
-          <h2>Energy Search</h2>
-            <input
-              id="energy-search"
-              type="text"
-              name="energy search"
-              placeholder="Fire"
-              onChange={(e) => setEnergySearch(e.target.value)}
-            />
-            {/* <button className="btn btn-danger" onClick={getEnergy}>
-              Search
-            </button> */}
-            <Link
-              className="btn btn-danger"
-              to={`/results/energy/${energySearch}&page=1`}
-            >
-              Search
-            </Link>
+          {/* SEARCH BAR */}
+          <div id="card-search-container" className="col-lg-3 search-container">
+            <h2>Card Search</h2>
+            <div className="input-group mb-3">
+              <select
+                className="scrollable-menu"
+                id="card-type-selection"
+                onChange={(e) => {
+                  setPlaceholder(
+                    e.target[e.target.selectedIndex].getAttribute(
+                      "data-placeholder"
+                    )
+                  );
+                  setCardType(e.target.value);
+                }}
+              >
+                <option defaultValue value="">All Cards</option>
+                <option data-placeholder="Nidoking" value="pokemon">Pokemon Only</option>
+                <option data-placeholder="Brock" value="trainer">Trainer Only</option>
+                <option data-placeholder="Water" value="energy">Energy Only</option>
+              </select>
+              <input
+                id="card-search"
+                type="text"
+                name="card search"
+                placeholder={placeholder}
+                onChange={(e) => setCardSearch(e.target.value)}
+              />
+              {/* <button className="btn btn-primary" onClick={getSets}>
+            Search
+          </button> */}
+              <Link
+                className="btn btn-danger"
+                to={`/search/results/${cardType}/${cardSearch}&page=1`}
+              >
+                Search
+              </Link>
+            </div>
           </div>
           {/* SET SEARCH DROPDOWN */}
           <div className="container">
-          <h2>Set Search</h2>
+            <h2>Set Search</h2>
             <div className="input-group mb-3">
               <select
                 className="custom-select scrollable-menu"
@@ -245,6 +158,9 @@ const AdvancedSearch = () => {
                 <option value="swsh5">Battle Styles</option>
                 <option value="swsh6">Chilling Reign</option>
                 <option value="swsh7">Evolving Skies</option>
+                <option value="cel25c">Celebrations: Classic Collection</option>
+                <option value="swsh8">Fusion Strike</option>
+                <option value="swsh9">Brilliant Stars</option>
               </select>
               {/* <button className="btn btn-primary" onClick={getSets}>
             Search
