@@ -12,6 +12,8 @@ const SearchResults = () => {
   const pageNumArr = [];
   const currentPage = window.location.pathname.split("=");
 
+  // FIX?
+
   // CARD API CALL
   const getSearchResults = async () => {
     console.log(params);
