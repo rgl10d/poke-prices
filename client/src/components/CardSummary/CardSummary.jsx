@@ -2,7 +2,7 @@ import React from "react";
 import "./CardSummary.css";
 import { Link } from "react-router-dom";
 
-const CardSummaryTest = (props) => {
+const CardSummary = (props) => {
   return (
     <>
       {props.cards.map((cards) => {
@@ -83,4 +83,4 @@ const CardSummaryTest = (props) => {
   );
 };
 
-export default CardSummaryTest;
+export default CardSummary;
