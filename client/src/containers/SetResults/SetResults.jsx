@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router";
 import CardSummary from "../../components/CardSummary/CardSummary";
 import Navbar from "../../components/Navbar/Navbar";
+// import pokemon from "pokemontcgsdk";
 
 const SetResults = () => {
   const entrySearch = useParams();
@@ -12,8 +13,10 @@ const SetResults = () => {
   const paginationNumbers = [];
   const currentPage = window.location.pathname.split("=");
 
-  const getSearchResults = async () => {
+
+  const getSearchResults = () => {
     console.log(entrySearch);
+
     const query =
       "https://api.pokemontcg.io/v2/cards?q=set.id:" +
       entrySearch.search +
@@ -46,7 +49,7 @@ const SetResults = () => {
         <li className="page-item active">
           <a
             className="page-link"
-            href={"/results/set/" + entrySearch.search + "&page=" + i}
+            href={"/search/set/" + entrySearch.search + "&page=" + i}
           >
             {i}
           </a>
@@ -57,7 +60,7 @@ const SetResults = () => {
         <li className="page-item">
           <a
             className="page-link"
-            href={"/results/set/" + entrySearch.search + "&page=" + i}
+            href={"/search/set/" + entrySearch.search + "&page=" + i}
           >
             {i}
           </a>

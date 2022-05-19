@@ -13,7 +13,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/search" component={Search} />
         <Route exact path="/search/results/:cardType/:search&page=:pageNum" component={SearchResults} />
-        <Route exact path="/search/results/set/:search&page=:pageNum" component={SetResults} />
+        <Route exact path="/search/set/:search&page=:pageNum" component={SetResults} />
         <Route exact path="/details/:id" component={Details} />
       </Switch>
     </Router>

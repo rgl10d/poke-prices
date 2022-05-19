@@ -11,7 +11,7 @@ pokemon.configure({ apiKey: "bda1ab63-5db0-43e0-8b1f-a50ba6b7fc4b" });
 
 const AdvancedSearch = () => {
   const [setList, setSetList] = useState([]);
-  const [setSearch, setSetSearch] = useState();
+  const [setSearch, setSetSearch] = useState("base1");
   const [cardType, setCardType] = useState("all");
   const [cardSearch, setCardSearch] = useState();
   const [placeholder, setPlaceholder] = useState();
@@ -96,7 +96,7 @@ const AdvancedSearch = () => {
           </button> */}
               <Link
                 className="btn btn-danger"
-                to={`/search/results/set/${setSearch}&page=1`}
+                to={`/search/set/${setSearch}&page=1`}
               >
                 Search
               </Link>
