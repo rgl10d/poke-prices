@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import CardSummary from "../../components/CardSummary/CardSummary.jsx";
 import Navbar from "../../components/Navbar/Navbar.jsx";
+// import pokemon from "pokemontcgsdk";
 
 const SearchResults = () => {
   const params = useParams();
@@ -11,8 +12,6 @@ const SearchResults = () => {
   // PAGINATION VARIABLES
   const pageNumArr = [];
   const currentPage = window.location.pathname.split("=");
-
-  // FIX?
 
   // CARD API CALL
   const getSearchResults = async () => {

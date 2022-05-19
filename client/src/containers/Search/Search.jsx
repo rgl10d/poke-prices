@@ -31,7 +31,7 @@ const AdvancedSearch = () => {
                   setCardType(e.target.value);
                 }}
               >
-                <option defaultValue value="">All Cards</option>
+                <option defaultValue value="all">All Cards</option>
                 <option data-placeholder="Nidoking" value="pokemon">Pokemon Only</option>
                 <option data-placeholder="Brock" value="trainer">Trainer Only</option>
                 <option data-placeholder="Water" value="energy">Energy Only</option>

@@ -1,44 +1,30 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { useParams } from "react-router";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Details.css";
+import pokemon from "pokemontcgsdk";
+
+// POKEMON CARD API KEY
+pokemon.configure({apiKey: 'bda1ab63-5db0-43e0-8b1f-a50ba6b7fc4b'})
 
 const Details = () => {
   const [cardDetail, setCardDetail] = useState([]);
-  const [image, setImage] = useState([]);
-  const [largeImage, setLargeImage] = useState([]);
+  const [error, setError] = useState(false);
+
   const [seeLarge, setSeeLarge] = useState(false);
-  const [pokedexNumber, setPokedexNumber] = useState([]);
-  const [types, setTypes] = useState([]);
-  const [cardSet, setCardSet] = useState([]);
-  const [attacks, setAttacks] = useState([]);
-  const [totalNumber, setTotalNumber] = useState([]);
-  const [releaseDate, setReleaseDate] = useState([]);
   const { id } = useParams();
 
   // AXIOS CALL FOR SPECIFIC CARD INFORMATION
-  const getDetails = async () => {
-    const query = "https://api.pokemontcg.io/v2/cards/" + id;
-    await axios
-      .get(query)
-      .then((response) => {
-        console.log(response.data.data);
-        if (response.data.data.types) {
-          setAttacks(response.data.data.attacks);
-          setTypes(response.data.data.types);
-          setPokedexNumber(response.data.data.nationalPokedexNumbers[0]);
+  const getDetails = () => {
+    pokemon.card.find(id)
+      .then(card => {
+        try {
+        setCardDetail(card);
+        } catch(err) {
+          setError(err)
         }
-        setImage(response.data.data.images.small);
-        setLargeImage(response.data.data.images.large);
-        setCardDetail(response.data.data);
-        setTotalNumber(response.data.data.set.printedTotal);
-        setReleaseDate(response.data.data.set.releaseDate);
-        setCardSet(response.data.data.set.name);
       })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   // AXIOS CALL WHEN PAGE LOADS
@@ -52,47 +38,44 @@ const Details = () => {
     setSeeLarge(!seeLarge);
   };
 
-  return (
-    <>
-      <Navbar />
-      <div className="container">
-        <h1>{cardDetail.name}</h1>
-        <img src={image} alt={cardDetail.name} onClick={handleShowLarge} />
-        <p>Click to enlarge or shrink image</p>
-        {seeLarge && (
-          <dialog className="large-card" open onClick={handleShowLarge}>
-            <img
-              className="large-card-image"
-              src={largeImage}
-              onClick={handleShowLarge}
-              alt={cardDetail.name}
-            />
-          </dialog>
-        )}
-        <p>Set: {cardSet}</p>
-        <p>
-          Number in set: {cardDetail.number}/{totalNumber}
-        </p>
-        <p>Released: {releaseDate}</p>
-        <p>Rarity: {cardDetail.rarity}</p>
-        <p>HP: {cardDetail.hp}</p>
-        <p>Artist: {cardDetail.artist}</p>
-        <p>{cardDetail.flavorText}</p>
-        <p>Pokdex Number: {pokedexNumber}</p>
-        {types.map((types) => {
-          return <p>Type(s): {types}</p>;
-        })}
-        {attacks.map((attacks) => {
-          return (
-            <p>
-              <span>{attacks.name}</span> - {attacks.text}{" "}
-              <span> {attacks.damage} </span>
-            </p>
-          );
-        })}
-      </div>
-    </>
-  );
+  if(cardDetail.images) {
+    return (
+      <>
+        <Navbar />
+        <div className="container">
+          <h1>{cardDetail.name}</h1>
+          <img src={cardDetail.images.small} alt={cardDetail.name} onClick={handleShowLarge} />
+          <p>Click to enlarge or shrink image</p>
+          {seeLarge && (
+            <dialog className="large-card" open onClick={handleShowLarge}>
+              <img
+                className="large-card-image"
+                src={cardDetail.images.large}
+                onClick={handleShowLarge}
+                alt={cardDetail.name}
+              />
+            </dialog>
+          )}
+          <p>Set: {cardDetail.set.name}</p>
+          <p>
+            Number in set: {cardDetail.number}/{cardDetail.set.printedTotal}
+          </p>
+        </div>
+      </>
+    );
+  }
+  
+  if(!cardDetail.images) {
+    return (
+      null
+    )
+  }
+
+  if(error) {
+    return (
+      <h1>Oops! Something went wrong!</h1>
+    )
+  }
 };
 
 export default Details;
