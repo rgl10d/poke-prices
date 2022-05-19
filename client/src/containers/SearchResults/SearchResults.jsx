@@ -14,7 +14,7 @@ const SearchResults = () => {
   const currentPage = window.location.pathname.split("=");
 
   // CARD API CALL
-  const getSearchResults = async () => {
+  const getSearchResults = () => {
     console.log(params);
     const query =
       "https://api.pokemontcg.io/v2/cards?q=supertype:" +
@@ -27,7 +27,7 @@ const SearchResults = () => {
     axios
       .get(query)
       .then((response) => {
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setCards(response.data.data);
         setCardTotal(response.data.totalCount);
       })
