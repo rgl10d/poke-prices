@@ -1,34 +1,21 @@
-.jumbotron {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+.searchEl {
+  width: 30%;
 }
 
-#enter-button {
-    margin-left: 40%;
-  }
-
-@media only screen and (max-device-width: 768px) {
-  #home-logo {
-    width: 300px;
-    height: 70px;
-  }
-  #enter-button {
-    margin-left: 35%;
-  }
+.search-bar-row {
+    display: flex;
+    justify-content: space-around;
 }
 
-@media only screen and (max-device-width: 425px) {
-  #home-logo {
-    width: 225px;
-    height: 50px;
-  }
-  #enter-button {
-    margin-left: 31%;
-  }
+.search-container {
+  position: relative;
+  text-align: center;
+  height: 500px;
+  margin: 30px 0;
+  border: solid grey 1px;
+  box-shadow: 1px 4px 4px 2px darkgrey;
+}
+
+#card-search-container {
+  background-color: lightblue;
 }

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import CardSummary from "../../components/CardSummary/CardSummary.jsx";
+import SearchResults from "../../components/SearchResults/SearchResults.jsx";
 import Navbar from "../../components/Navbar/Navbar.jsx";
 import pokemon from "pokemontcgsdk";
 
 // POKEMON CARD API KEY
 pokemon.configure({ apiKey: "bda1ab63-5db0-43e0-8b1f-a50ba6b7fc4b" });
 
-const SearchResults = () => {
+const CardSearch = () => {
   const params = useParams();
   const [cards, setCards] = useState([]);
   const [cardTotal, setCardTotal] = useState();
@@ -69,7 +69,7 @@ const SearchResults = () => {
           <a
             className="page-link"
             href={
-              "/search/results/" +
+              "/card/" +
               params.cardType +
               "/" +
               params.search +
@@ -87,7 +87,7 @@ const SearchResults = () => {
           <a
             className="page-link"
             href={
-              "/search/results/" +
+              "/card/" +
               params.cardType +
               "/" +
               params.search +
@@ -106,7 +106,7 @@ const SearchResults = () => {
     <>
       <Navbar />
       <div className="container">
-        <CardSummary cards={cards} />
+        <SearchResults cards={cards} />
         <nav aria-label="Search results pages">
           <ul className="pagination justify-content-center">{pageNumArr}</ul>
         </nav>
@@ -115,4 +115,4 @@ const SearchResults = () => {
   );
 };
 
-export default SearchResults;
+export default CardSearch;
