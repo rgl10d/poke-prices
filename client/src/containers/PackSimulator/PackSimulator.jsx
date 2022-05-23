@@ -30,14 +30,23 @@ const PackSimulator = () => {
 
   // PACK LOGIC FUNCTION
   const openPack = () => {
+    // MOVE TO TOP OF PAGE WHEN OPENING NEW PACK
+    window.scrollTo(0, 0)
+
     const packArray = [];
     for (let i = 0; i < 11; i++) {
       if (i < 7) {
-        packArray.push(commonCards[[Math.floor(Math.random() * commonCards.length)]]);
+        packArray.push(
+          commonCards[[Math.floor(Math.random() * commonCards.length)]]
+        );
       } else if (i >= 7 && i < 10) {
-        packArray.push(uncommonCards[[Math.floor(Math.random() * uncommonCards.length)]]);
+        packArray.push(
+          uncommonCards[[Math.floor(Math.random() * uncommonCards.length)]]
+        );
       } else {
-        packArray.push(rareCards[[Math.floor(Math.random() * rareCards.length)]]);
+        packArray.push(
+          rareCards[[Math.floor(Math.random() * rareCards.length)]]
+        );
       }
     }
     setPack(packArray);
@@ -51,10 +60,12 @@ const PackSimulator = () => {
           {pack.map((cards) => {
             return <img src={cards.images.small} alt={cards.name} />;
           })}
+          <div className="col-sm-12">
+            <button className="btn btn-primary" onClick={openPack}>
+              Open a pack!
+            </button>
+          </div>
         </div>
-        <button className="btn btn-primary" onClick={openPack}>
-          Open a pack!
-        </button>
       </>
     );
   }
