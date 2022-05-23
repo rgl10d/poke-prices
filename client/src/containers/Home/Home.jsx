@@ -16,7 +16,7 @@ const Home = () => {
   const [cardSearch, setCardSearch] = useState("bulbasaur");
   const [placeholder, setPlaceholder] = useState();
 
-  // AXIOS CALL WHEN PAGE LOADS
+  // GET LIST OF ALL CARD SETS ON PAGE LOAD
   useEffect(() => {
     pokemon.set.all().then((sets) => {
       setSetList(sets);

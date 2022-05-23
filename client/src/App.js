@@ -8,6 +8,7 @@ import CardSearch from "./containers/CardSearch/CardSearch.jsx";
 import SetSearch from "./containers/SetSearch/SetSearch.jsx";
 import UserProfile from "./containers/UserProfile/UserProfile.jsx";
 import PackSimulator from "./containers/PackSimulator/PackSimulator.jsx";
+import PackSelect from "./containers/PackSelect/PackSelect.jsx";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
         <Route exact path="/details/:id" component={Details} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/profile" component={UserProfile} />
-        <Route exact path="/packsim" component={PackSimulator} />
+        <Route exact path="/packsim" component={PackSelect} />
+        <Route exact path="/packsim/:setid" component={PackSimulator} />
       </Switch>
     </Router>
   );
