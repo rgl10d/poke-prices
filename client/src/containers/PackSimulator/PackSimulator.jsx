@@ -6,24 +6,41 @@ import pokemon from "pokemontcgsdk";
 pokemon.configure({ apiKey: "bda1ab63-5db0-43e0-8b1f-a50ba6b7fc4b" });
 
 const PackSimulator = () => {
-  const [cardList, setCardList] = useState(null);
+  const [commonCards, setCommonCards] = useState();
+  const [uncommonCards, setUncommonCards] = useState();
+  const [rareCards, setRareCards] = useState(null);
   const [pack, setPack] = useState();
 
   // FETCH SPECIFIC SET CARD LIST ON PAGE LOAD
   useEffect(() => {
     pokemon.card.where({ q: "set.id:base1 rarity:Common" }).then((results) => {
-      setCardList(results.data);
+      setCommonCards(results.data);
     });
-  }, [cardList]);
+
+    pokemon.card
+      .where({ q: "set.id:base1 rarity:Uncommon" })
+      .then((results) => {
+        setUncommonCards(results.data);
+      });
+
+    pokemon.card.where({ q: "set.id:base1 rarity:Rare" }).then((results) => {
+      setRareCards(results.data);
+    });
+  }, []);
 
   // PACK LOGIC FUNCTION
   const openPack = () => {
-    const commonArray = [];
-    for (let i = 0; i < 7; i++) {
-      commonArray.push(cardList[[Math.floor(Math.random() * cardList.length)]]);
+    const packArray = [];
+    for (let i = 0; i < 11; i++) {
+      if (i < 7) {
+        packArray.push(commonCards[[Math.floor(Math.random() * commonCards.length)]]);
+      } else if (i >= 7 && i < 10) {
+        packArray.push(uncommonCards[[Math.floor(Math.random() * uncommonCards.length)]]);
+      } else {
+        packArray.push(rareCards[[Math.floor(Math.random() * rareCards.length)]]);
+      }
     }
-    setPack(commonArray);
-    // console.log(cardList);
+    setPack(packArray);
   };
 
   if (pack) {
@@ -42,7 +59,7 @@ const PackSimulator = () => {
     );
   }
 
-  if (cardList === null) {
+  if (rareCards === null) {
     return (
       <>
         <Navbar />
@@ -57,7 +74,7 @@ const PackSimulator = () => {
     );
   }
 
-  if (cardList) {
+  if (rareCards) {
     return (
       <>
         <Navbar />
