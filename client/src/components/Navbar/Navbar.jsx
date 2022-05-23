@@ -26,6 +26,9 @@ const Navbar = () => {
             <li className="nav-item active">
               <a className="nav-link" href="/profile">My Profile</a>
             </li>
+            <li className="nav-item active">
+              <a className="nav-link" href="/packsim">Open a Pack</a>
+            </li>
           </ul>
       </div>
 
