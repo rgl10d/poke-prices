@@ -10,8 +10,8 @@ const PackSimulator = () => {
   const [pack, setPack] = useState();
 
   const openPack = () => {
-    // setPack(cardList[[Math.floor(Math.random() * cardList.length)]])
-    console.log(cardList);
+    setPack(cardList[[Math.floor(Math.random() * cardList.length)]]);
+    // console.log(cardList);
   };
 
   // FETCH SPECIFIC SET CARD LIST ON PAGE LOAD
@@ -21,61 +21,35 @@ const PackSimulator = () => {
     });
   }, []);
 
-
-
-
-//   if(cardDetail.images) {
-//     return (
-//       <>
-//         <Navbar />
-//         <div className="container">
-//           <h1>{cardDetail.name}</h1>
-//           <img src={cardDetail.images.small} alt={cardDetail.name} onClick={handleShowLarge} />
-//           <p>Click to enlarge or shrink image</p>
-//           {seeLarge && (
-//             <dialog className="large-card" open onClick={handleShowLarge}>
-//               <img
-//                 className="large-card-image"
-//                 src={cardDetail.images.large}
-//                 onClick={handleShowLarge}
-//                 alt={cardDetail.name}
-//               />
-//             </dialog>
-//           )}
-//           <p>Set: {cardDetail.set.name}</p>
-//           <p>
-//             Number in set: {cardDetail.number}/{cardDetail.set.printedTotal}
-//           </p>
-//         </div>
-//       </>
-//     );
-//   }
-  
-//   if(!cardDetail.images) {
-//     return (
-//       null
-//     )
-//   }
-
-//   if(error) {
-//     return (
-//       <h1>Oops! Something went wrong!</h1>
-//     )
-//   }
-
-
-  return (
-    <>
-      <Navbar />
-      <div>
-        <h1>Pokemon card pack simulator.</h1>
-
+  if (pack) {
+    return (
+      <>
+        <Navbar />
+        <div className="container">
+          <h1>{pack.name}</h1>
+          <img src={pack.images.small} alt={pack.name} />
+        </div>
         <button className="btn btn-primary" onClick={openPack}>
           Open a pack!
         </button>
-      </div>
-    </>
-  );
+      </>
+    );
+  }
+
+  if (!pack) {
+    return (
+      <>
+        <Navbar />
+        <div>
+          <h1>Pokemon card pack simulator.</h1>
+
+          <button className="btn btn-primary" onClick={openPack}>
+            Open a pack!
+          </button>
+        </div>
+      </>
+    );
+  }
 };
 
 export default PackSimulator;
