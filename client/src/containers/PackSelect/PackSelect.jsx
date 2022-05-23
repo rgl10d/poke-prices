@@ -14,7 +14,10 @@ const PackSelect = () => {
           cardSet.series !== "Other" &&
           cardSet.series !== "POP" &&
           cardSet.series !== "Promo" &&
-          !cardSet.name.includes("Promos")
+          !cardSet.name.includes("Promos") &&
+          !cardSet.name.includes("Trainer Kit") &&
+          !cardSet.name.includes("Shiny Vault") &&
+          cardSet.total > 50
         );
       });
       setPackSets(filteredSets);
