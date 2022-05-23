@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import pokemon from "pokemontcgsdk";
+import { useParams } from "react-router-dom";
 
 // POKEMON CARD API KEY
 pokemon.configure({ apiKey: "bda1ab63-5db0-43e0-8b1f-a50ba6b7fc4b" });
@@ -10,28 +11,34 @@ const PackSimulator = () => {
   const [uncommonCards, setUncommonCards] = useState();
   const [rareCards, setRareCards] = useState(null);
   const [pack, setPack] = useState();
+  const params = useParams();
 
   // FETCH SPECIFIC SET CARD LIST ON PAGE LOAD
   useEffect(() => {
-    pokemon.card.where({ q: "set.id:base1 rarity:Common" }).then((results) => {
-      setCommonCards(results.data);
-    });
+    pokemon.card
+      .where({ q: "set.id:" + params.setid + " rarity:Common" })
+      .then((results) => {
+        setCommonCards(results.data);
+      });
 
     pokemon.card
-      .where({ q: "set.id:base1 rarity:Uncommon" })
+      .where({ q: "set.id:" + params.setid + " rarity:Uncommon" })
       .then((results) => {
         setUncommonCards(results.data);
       });
 
-    pokemon.card.where({ q: "set.id:base1 rarity:Rare" }).then((results) => {
-      setRareCards(results.data);
-    });
+    pokemon.card
+      .where({ q: "set.id:" + params.setid + " rarity:Rare" })
+      .then((results) => {
+        setRareCards(results.data);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // PACK LOGIC FUNCTION
   const openPack = () => {
     // MOVE TO TOP OF PAGE WHEN OPENING NEW PACK
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
 
     const packArray = [];
     for (let i = 0; i < 11; i++) {
