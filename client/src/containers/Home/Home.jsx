@@ -14,6 +14,7 @@ const Home = () => {
   const [setSearch, setSetSearch] = useState("base1");
   const [cardType, setCardType] = useState("all");
   const [cardSearch, setCardSearch] = useState("bulbasaur");
+  const [searchThemeState, setSearchThemeState] = useState("col-lg-6 card-search-container-all");
   const [placeholder, setPlaceholder] = useState();
 
   // GET LIST OF ALL CARD SETS ON PAGE LOAD
@@ -24,13 +25,26 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // FUNCTION CHANGES THE CLASS/BACKGROUND OF THE CARD SEARCH CONTAINER
+  const handleSearchTheme = (event) => {
+    if(event.target.value === "pokemon") {
+      setSearchThemeState("col-lg-6 card-search-container-pokemon-only");
+    } else if (event.target.value === "trainer") {
+      setSearchThemeState("col-lg-6 card-search-container-trainer-only");
+    } else if (event.target.value === "energy") {
+      setSearchThemeState("col-lg-6 card-search-container-energy-only");
+    } else {
+      setSearchThemeState("col-lg-6 card-search-container-all");
+    }
+  }
+
   return (
     <>
       <Navbar />
-      <div className="fluid-container">
+      <div className="container">
         <div className="row search-bar-row no-gutters">
           {/* SEARCH BAR */}
-          <div id="card-search-container" className="col-lg-3 search-container">
+          <div id="card-search-container" className={searchThemeState}>
             <h2>Card Search</h2>
             <div className="input-group mb-3">
               <select
@@ -43,6 +57,7 @@ const Home = () => {
                     )
                   );
                   setCardType(e.target.value);
+                  handleSearchTheme(e);
                 }}
               >
                 <option defaultValue value="all">

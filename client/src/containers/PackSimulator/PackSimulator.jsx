@@ -97,6 +97,7 @@ const PackSimulator = () => {
     setClickState(!clickState);
   };
 
+  // IF A PACK HAS BEEN "OPENED"
   if (pack) {
     return (
       <>
@@ -147,6 +148,7 @@ const PackSimulator = () => {
     );
   }
 
+  // IF API CALL HASN'T FINISHED LOADING
   if (rareCards === null) {
     return (
       <>
@@ -169,6 +171,7 @@ const PackSimulator = () => {
     );
   }
 
+  // IF API CALL HAS FINISHED LOADING
   if (rareCards) {
     return (
       <>
