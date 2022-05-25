@@ -14,20 +14,41 @@ const Home = () => {
   const [setSearch, setSetSearch] = useState("base1");
   const [cardType, setCardType] = useState("all");
   const [cardSearch, setCardSearch] = useState("bulbasaur");
-  const [searchThemeState, setSearchThemeState] = useState("col-lg-6 card-search-container-all");
+  const [searchThemeState, setSearchThemeState] = useState(
+    "col-lg-6 card-search-container-all"
+  );
   const [placeholder, setPlaceholder] = useState();
+  const [searchContainerCardState, setSearchContainerCardState] = useState();
 
-  // GET LIST OF ALL CARD SETS ON PAGE LOAD
   useEffect(() => {
+    // GENERATE RANDOM NUMBER
+    const randomPokedexNum = Math.floor(Math.random() * 908) + 1;
+
+    // GET LIST OF ALL CARD SETS ON PAGE LOAD
     pokemon.set.all().then((sets) => {
       setSetList(sets);
     });
+
+    // GET RANDOM POKEMON CARD
+    pokemon.card
+      .where({
+        q:
+          "supertype:pokemon nationalPokedexNumbers:[" +
+          randomPokedexNum +
+          " TO " +
+          randomPokedexNum +
+          "]",
+        pageSize: 3
+      })
+      .then((randomCard) => {
+        setSearchContainerCardState(randomCard.data[0].images.small)
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // FUNCTION CHANGES THE CLASS/BACKGROUND OF THE CARD SEARCH CONTAINER
   const handleSearchTheme = (event) => {
-    if(event.target.value === "pokemon") {
+    if (event.target.value === "pokemon") {
       setSearchThemeState("col-lg-6 card-search-container-pokemon-only");
     } else if (event.target.value === "trainer") {
       setSearchThemeState("col-lg-6 card-search-container-trainer-only");
@@ -36,7 +57,7 @@ const Home = () => {
     } else {
       setSearchThemeState("col-lg-6 card-search-container-all");
     }
-  }
+  };
 
   return (
     <>
@@ -89,8 +110,10 @@ const Home = () => {
               >
                 Search
               </Link>
+              <img src={searchContainerCardState} />
             </div>
           </div>
+
           {/* SET SEARCH DROPDOWN */}
           <div className="container">
             <h2>Set Search</h2>
@@ -101,18 +124,13 @@ const Home = () => {
                 onChange={(e) => setSetSearch(e.target.value)}
               >
                 {setList.map((sets) => {
-                  return(
-                  <option value={sets.id}>{sets.name}</option>
-                  )
+                  return <option value={sets.id}>{sets.name}</option>;
                 })}
               </select>
               {/* <button className="btn btn-primary" onClick={getSets}>
             Search
           </button> */}
-              <Link
-                className="btn btn-danger"
-                to={`/set/${setSearch}&page=1`}
-              >
+              <Link className="btn btn-danger" to={`/set/${setSearch}&page=1`}>
                 Search
               </Link>
             </div>
@@ -124,4 +142,3 @@ const Home = () => {
 };
 
 export default Home;
-
