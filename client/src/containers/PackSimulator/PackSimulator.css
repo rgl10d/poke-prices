@@ -1,3 +1,12 @@
+.card-pack-result {
+    flex: initial;
+    padding: 10px;
+}
+
+.open-pack-button {
+    margin-top: 50px;
+}
+
 
 /* CARD FLIP ANIMATION CLASSES */
 /* entire container, keeps perspective */
@@ -31,7 +40,7 @@
 	backface-visibility: hidden;
 	position: absolute;
 	top: 0;
-	left: 0;
+    left: -10px;
 }
 
 /* front pane, placed above back */

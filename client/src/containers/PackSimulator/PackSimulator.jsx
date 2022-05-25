@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./PackSimulator.css";
-import cardBack from "../../assets/images/pokemonCardBackEdited.png";
+import cardBack from "../../assets/images/pokemonCardBackEdit.png";
 import pokemon from "pokemontcgsdk";
 import { useParams } from "react-router-dom";
 // POKEMON CARD API KEY
@@ -41,7 +41,7 @@ const PackSimulator = () => {
 
   // PACK LOGIC FUNCTION
   const openPack = () => {
-    // CONDITIONAL TO WAIT IF A PACK HAS BEEN OPENED ALREADY 
+    // CONDITIONAL TO WAIT IF A PACK HAS BEEN OPENED ALREADY
     if (pack) {
       // MOVE TO TOP OF PAGE WHEN OPENING NEW PACK
       window.scrollTo(0, 0);
@@ -65,8 +65,8 @@ const PackSimulator = () => {
           }
         }
         setPack(packArray);
-      }, 800)
-    // CONDITIONAL TO SKIP THE .8 SECOND TIMEOUT IF A PACK WASN'T OPENED YET
+      }, 800);
+      // CONDITIONAL TO SKIP THE .8 SECOND TIMEOUT IF A PACK WASN'T OPENED YET
     } else {
       const packArray = [];
       for (let i = 0; i < 11; i++) {
@@ -93,7 +93,6 @@ const PackSimulator = () => {
     if (!flipArray.includes(event.target.id)) {
       clickedCardArray.push(event.target.id);
       setFlipArray(clickedCardArray);
-      console.log(flipArray);
     }
     setClickState(!clickState);
   };
@@ -103,39 +102,45 @@ const PackSimulator = () => {
       <>
         <Navbar />
         <div className="container">
-          {pack.map((cards, i) => {
-            return (
-              <>
-                <div
-                  className={
-                    flipArray.includes("pack-card-" + i)
-                      ? "flip-container flip"
-                      : "flip-container"
-                  }
-                  onClick={revealCard}
-                >
-                  <div className="flipper">
-                    <img
-                      src={cardBack}
-                      alt="Pokemon Card Back"
-                      id={"pack-card-" + i}
-                      className="front card-back"
-                    />
-                    <img
-                      src={cards.images.small}
-                      alt={cards.name}
-                      className="back card-front"
-                    />
-                    ;
+          <div className="row">
+            {pack.map((cards, i) => {
+              return (
+                <>
+                  <div
+                    className={
+                      flipArray.includes("pack-card-" + i)
+                        ? "flip-container flip col-sm-3 card-pack-result"
+                        : "flip-container col-sm-3 card-pack-result"
+                    }
+                    onClick={revealCard}
+                  >
+                    <div className="flipper">
+                      <img
+                        src={cardBack}
+                        alt="Pokemon Card Back"
+                        id={"pack-card-" + i}
+                        className="front card-pack-result"
+                      />
+                      <img
+                        src={cards.images.small}
+                        alt={cards.name}
+                        className="back card-pack-result"
+                      />
+                    </div>
                   </div>
-                </div>
-              </>
-            );
-          })}
-          <div className="col-sm-12">
-            <button className="btn btn-primary" onClick={openPack}>
-              Open a pack!
-            </button>
+                </>
+              );
+            })}
+          </div>
+          <div className="row">
+            <div className="col text-center">
+              <button
+                className="btn btn-primary open-pack-button"
+                onClick={openPack}
+              >
+                Open another!
+              </button>
+            </div>
           </div>
         </div>
       </>
@@ -147,11 +152,18 @@ const PackSimulator = () => {
       <>
         <Navbar />
         <div>
-          <h1>Pokemon card pack simulator.</h1>
+          <h1 className="text-center">Pokemon card pack simulator</h1>
 
-          <button className="btn btn-primary" disabled onClick={openPack}>
-            Open a pack!
-          </button>
+          <div className="row">
+            <div className="col text-center">
+              <button
+                className="btn btn-danger open-pack-button"
+                onClick={openPack}
+              >
+                Loading...
+              </button>
+            </div>
+          </div>
         </div>
       </>
     );
@@ -162,11 +174,18 @@ const PackSimulator = () => {
       <>
         <Navbar />
         <div>
-          <h1>Pokemon card pack simulator.</h1>
+          <h1 className="text-center">Pokemon card pack simulator</h1>
 
-          <button className="btn btn-success" onClick={openPack}>
-            Open a pack!
-          </button>
+          <div className="row">
+            <div className="col text-center">
+              <button
+                className="btn btn-primary open-pack-button"
+                onClick={openPack}
+              >
+                Open a pack!
+              </button>
+            </div>
+          </div>
         </div>
       </>
     );
