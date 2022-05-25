@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./PackSimulator.css";
 import cardBack from "../../assets/images/pokemonCardBackEdited.png";
@@ -41,26 +41,51 @@ const PackSimulator = () => {
 
   // PACK LOGIC FUNCTION
   const openPack = () => {
-    // MOVE TO TOP OF PAGE WHEN OPENING NEW PACK
-    window.scrollTo(0, 0);
-    setFlipArray([]);
-    const packArray = [];
-    for (let i = 0; i < 11; i++) {
-      if (i < 7) {
-        packArray.push(
-          commonCards[[Math.floor(Math.random() * commonCards.length)]]
-        );
-      } else if (i >= 7 && i < 10) {
-        packArray.push(
-          uncommonCards[[Math.floor(Math.random() * uncommonCards.length)]]
-        );
-      } else {
-        packArray.push(
-          rareCards[[Math.floor(Math.random() * rareCards.length)]]
-        );
+    // CONDITIONAL TO WAIT IF A PACK HAS BEEN OPENED ALREADY 
+    if (pack) {
+      // MOVE TO TOP OF PAGE WHEN OPENING NEW PACK
+      window.scrollTo(0, 0);
+      setFlipArray([]);
+      // CREATED A SET TIMEOUT FOR .8 SECONDS FOR TIME FOR THE CARDS TO FLIP OVER BEFORE CHANGING WHAT THEY ARE
+      setTimeout(() => {
+        const packArray = [];
+        for (let i = 0; i < 11; i++) {
+          if (i < 7) {
+            packArray.push(
+              commonCards[[Math.floor(Math.random() * commonCards.length)]]
+            );
+          } else if (i >= 7 && i < 10) {
+            packArray.push(
+              uncommonCards[[Math.floor(Math.random() * uncommonCards.length)]]
+            );
+          } else {
+            packArray.push(
+              rareCards[[Math.floor(Math.random() * rareCards.length)]]
+            );
+          }
+        }
+        setPack(packArray);
+      }, 800)
+    // CONDITIONAL TO SKIP THE .8 SECOND TIMEOUT IF A PACK WASN'T OPENED YET
+    } else {
+      const packArray = [];
+      for (let i = 0; i < 11; i++) {
+        if (i < 7) {
+          packArray.push(
+            commonCards[[Math.floor(Math.random() * commonCards.length)]]
+          );
+        } else if (i >= 7 && i < 10) {
+          packArray.push(
+            uncommonCards[[Math.floor(Math.random() * uncommonCards.length)]]
+          );
+        } else {
+          packArray.push(
+            rareCards[[Math.floor(Math.random() * rareCards.length)]]
+          );
+        }
       }
+      setPack(packArray);
     }
-    setPack(packArray);
   };
 
   // CARD FLIP ANIMATION FUNCTION
