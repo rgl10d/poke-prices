@@ -18,7 +18,8 @@ const Home = () => {
     "col-lg-6 card-search-container-all"
   );
   const [placeholder, setPlaceholder] = useState();
-  const [searchContainerCardState, setSearchContainerCardState] = useState();
+  // const [searchContainerCardState, setSearchContainerCardState] = useState();
+  // const [searchContainerCardAlt, setSearchContainerCardAlt] = useState();
 
   useEffect(() => {
     // GENERATE RANDOM NUMBER
@@ -30,19 +31,20 @@ const Home = () => {
     });
 
     // GET RANDOM POKEMON CARD
-    pokemon.card
-      .where({
-        q:
-          "supertype:pokemon nationalPokedexNumbers:[" +
-          randomPokedexNum +
-          " TO " +
-          randomPokedexNum +
-          "]",
-        pageSize: 3
-      })
-      .then((randomCard) => {
-        setSearchContainerCardState(randomCard.data[0].images.small)
-      });
+    // pokemon.card
+    //   .where({
+    //     q:
+    //       "supertype:pokemon nationalPokedexNumbers:[" +
+    //       randomPokedexNum +
+    //       " TO " +
+    //       randomPokedexNum +
+    //       "]",
+    //     pageSize: 3
+    //   })
+    //   .then((randomCard) => {
+    //     setSearchContainerCardState(randomCard.data[0].images.small);
+    //     setSearchContainerCardAlt(randomCard.data[0].name);
+    //   });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -110,7 +112,7 @@ const Home = () => {
               >
                 Search
               </Link>
-              <img src={searchContainerCardState} />
+              {/* <img src={searchContainerCardState} alt={searchContainerCardAlt} /> */}
             </div>
           </div>
 
