@@ -23,7 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     // GENERATE RANDOM NUMBER
-    const randomPokedexNum = Math.floor(Math.random() * 908) + 1;
+    // const randomPokedexNum = Math.floor(Math.random() * 908) + 1;
 
     // GET LIST OF ALL CARD SETS ON PAGE LOAD
     pokemon.set.all().then((sets) => {
