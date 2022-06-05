@@ -18,12 +18,12 @@ const Home = () => {
     "col-lg-6 card-search-container-all"
   );
   const [placeholder, setPlaceholder] = useState();
-  // const [searchContainerCardState, setSearchContainerCardState] = useState();
-  // const [searchContainerCardAlt, setSearchContainerCardAlt] = useState();
+  const [searchContainerCardState, setSearchContainerCardState] = useState();
+  const [searchContainerCardAlt, setSearchContainerCardAlt] = useState();
 
   useEffect(() => {
     // GENERATE RANDOM NUMBER
-    // const randomPokedexNum = Math.floor(Math.random() * 908) + 1;
+    const randomPokedexNum = Math.floor(Math.random() * 150) + 1;
 
     // GET LIST OF ALL CARD SETS ON PAGE LOAD
     pokemon.set.all().then((sets) => {
@@ -31,20 +31,20 @@ const Home = () => {
     });
 
     // GET RANDOM POKEMON CARD
-    // pokemon.card
-    //   .where({
-    //     q:
-    //       "supertype:pokemon nationalPokedexNumbers:[" +
-    //       randomPokedexNum +
-    //       " TO " +
-    //       randomPokedexNum +
-    //       "]",
-    //     pageSize: 3
-    //   })
-    //   .then((randomCard) => {
-    //     setSearchContainerCardState(randomCard.data[0].images.small);
-    //     setSearchContainerCardAlt(randomCard.data[0].name);
-    //   });
+    pokemon.card
+      .where({
+        q:
+          "supertype:pokemon nationalPokedexNumbers:[" +
+          randomPokedexNum +
+          " TO " +
+          randomPokedexNum +
+          "]",
+        pageSize: 3
+      })
+      .then((randomCard) => {
+        setSearchContainerCardState(randomCard.data[0].images.small);
+        setSearchContainerCardAlt(randomCard.data[0].name);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -112,7 +112,7 @@ const Home = () => {
               >
                 Search
               </Link>
-              {/* <img src={searchContainerCardState} alt={searchContainerCardAlt} /> */}
+              <img src={searchContainerCardState} alt={searchContainerCardAlt} />
             </div>
           </div>
 
